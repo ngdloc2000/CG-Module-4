@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/submit" th:object="${product}" method="post">
+    <label>Nhập tên</label>
+    <input type="text" th:field="*{name}" >
+    <label>Nhập mô tả</label>
+    <input type="text" th:field="*{des}">
+    <button type="submit"></button>
+</form>
+</body>
+</html>

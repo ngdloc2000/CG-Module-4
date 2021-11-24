@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="">
+    <table>
+        <tr>
+            <th>Tên</th>
+            <th>Mô tả</th>
+        </tr>
+        <tr th:each="product: ${list}">
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.des}"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
