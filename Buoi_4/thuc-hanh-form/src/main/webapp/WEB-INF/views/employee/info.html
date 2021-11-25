@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="cusdetail">
+    <label>Name:</label>
+    <label th:text="${employee.id}"></label>
+</div>
+<div class="cusdetail">
+    <label>Email:</label>
+    <label th:text="${employee.name}"></label>
+</div>
+<div class="cusdetail">
+    <label>Address:</label>
+    <label th:text="${employee.contactNumber}"></label>
+</div>
+</body>
+</html>
