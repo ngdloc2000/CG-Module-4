@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Xóa nghệ sĩ</title>
+</head>
+<body>
+<h1>Xóa nghệ sĩ</h1>
+<h2>Bạn có chắc?</h2>
+<p>
+    <a href="/artist">Quay lại trang chính</a>
+</p>
+<form th:action="@{/delete-artist}" th:object="${artist}" method="post">
+    <input th:type="hidden" name="id" th:field="*{id}">
+    <table border="1">
+        <tr>
+            <td>Ảnh đại diện</td>
+            <td>Tên nghệ sĩ</td>
+            <td>Ngày sinh</td>
+            <td>Quê quán</td>
+            <td>Fanpage</td>
+            <td>Nghề nghiệp</td>
+        </tr>
+        <tr>
+            <td>
+                <img width="100" height="100" th:src="@{${'/image/'+artist.image}}">
+            </td>
+            <td th:text="${artist.name}"></td>
+            <td th:text="${artist.dob}"></td>
+            <td th:text="${artist.countryside}"></td>
+            <td><a th:href="${artist.fanpage}">Link</a></td>
+            <td th:text="${artist.getJob().name}"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Xóa nghệ sĩ"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

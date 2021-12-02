@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>
+    <a th:href="@{/artist}">Quay lại trang chính</a>
+</p>
+<h1>Thêm mới</h1>
+<form th:action="@{/create-artist}" th:object="${artistForm}" method="post" enctype="multipart/form-data">
+    <table>
+        <input type="hidden" th:field="*{id}">
+        <div>
+            <label>Name</label>
+            <input type="text" th:field="*{name}"/>
+        </div>
+        <div>
+            <label>Ngày sinh</label>
+            <input type="date" th:field="*{dob}"/>
+        </div>
+        <div>
+            <label>Quê quán</label>
+            <input type="text" th:field="*{countryside}"/>
+        </div>
+        <div>
+            <label>Fanpage</label>
+            <input type="text" th:field="*{fanpage}"/>
+        </div>
+        <div>
+            <label>Nghề nghiệp</label>
+            <select th:field="*{job}">
+                <option th:each="j : ${jobs}" th:value="${j.id}" th:text="${j.name}"></option>
+            </select>
+        </div>
+        <div>
+            <label>Image</label>
+            <input type="file" th:field="*{image}"/>
+        </div>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Tạo nghệ sĩ"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
