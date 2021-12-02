@@ -2,6 +2,7 @@ package com.codegym.artist.model;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "artist")
@@ -17,6 +18,8 @@ public class Artist {
     @ManyToOne
     @JoinColumn(name = "job_id")
     private Job job;
+    @OneToMany(mappedBy = "artist")
+    private List<ArtistPrize> artistPrizes;
 
     public Artist() {
     }
@@ -29,6 +32,25 @@ public class Artist {
         this.fanpage = fanpage;
         this.image = image;
         this.job = job;
+    }
+
+    public Artist(Long id, String name, Date dob, String countryside, String fanpage, String image, Job job, List<ArtistPrize> artistPrizes) {
+        this.id = id;
+        this.name = name;
+        this.dob = dob;
+        this.countryside = countryside;
+        this.fanpage = fanpage;
+        this.image = image;
+        this.job = job;
+        this.artistPrizes = artistPrizes;
+    }
+
+    public List<ArtistPrize> getArtistPrizes() {
+        return artistPrizes;
+    }
+
+    public void setArtistPrizes(List<ArtistPrize> artistPrizes) {
+        this.artistPrizes = artistPrizes;
     }
 
     public Long getId() {

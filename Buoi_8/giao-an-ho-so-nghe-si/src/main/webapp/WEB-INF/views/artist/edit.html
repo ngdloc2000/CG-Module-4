@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>
+    <a th:href="@{/artist}">Quay lại trang chính</a>
+</p>
+<h1>Sửa nghệ sĩ</h1>
+<form th:action="@{/edit-artist}" th:object="${artistForm}" method="post" enctype="multipart/form-data">
+    <table>
+        <input type="hidden" th:field="*{id}">
+        <div>
+            <label>Name</label>
+            <input type="text" th:field="*{name}" th:text="${artist.name}"/>
+        </div>
+        <div>
+            <label>Ngày sinh</label>
+            <input type="date" th:field="*{dob}" th:text="${artist.dob}"/>
+        </div>
+        <div>
+            <label>Quê quán</label>
+            <input type="text" th:field="*{countryside}" th:text="${artist.countryside}"/>
+        </div>
+        <div>
+            <label>Fanpage</label>
+            <input type="text" th:field="*{fanpage}" th:text="${artist.fanpage}"/>
+        </div>
+        <div>
+            <label>Nghề nghiệp</label>
+            <select name="job">
+                <option th:each="j : ${jobs}"
+                        th:value="${j.id}"
+                        th:text="${j.name}"
+                        th:selected="(${artistForm.job}) and (${j.id} == *{job.id})">
+                </option>
+            </select>
+        </div>
+<!--        <div>-->
+<!--            <label>Image cũ</label>-->
+<!--            <input type="file" th:field="*{image}"/>-->
+<!--            <img width="100" height="100" th:src="@{${'/image/'+artist.image}}">-->
+<!--        </div>-->
+        <div>
+            <label>Image</label>
+            <input type="file" th:field="*{image}"/>
+        </div>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Tạo nghệ sĩ"></td>
+        </tr>
+    </table>
+</form>
+
+</body>
+</html>

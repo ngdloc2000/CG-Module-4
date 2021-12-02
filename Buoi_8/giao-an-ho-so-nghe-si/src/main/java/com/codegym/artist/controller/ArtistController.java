@@ -69,6 +69,32 @@ public class ArtistController {
         return modelAndView;
     }
 
+    @GetMapping("/edit-artist/{id}")
+    public ModelAndView showEditForm(@PathVariable("id") Long id) {
+        Optional<Artist> artist = artistService.findById(id);
+        ModelAndView modelAndView = new ModelAndView("artist/edit");
+        modelAndView.addObject("artist", artist.get());
+        ArtistForm artistForm = new ArtistForm();
+        artistForm.setId(artist.get().getId());
+        modelAndView.addObject("artistForm", artistForm);
+        return modelAndView;
+    }
+
+    @PostMapping("/edit-artist")
+    public ModelAndView updateArtist(@ModelAttribute("artistForm") ArtistForm artistForm) {
+        MultipartFile multipartFile = artistForm.getImage();
+        String fileName = multipartFile.getOriginalFilename();
+        try {
+            FileCopyUtils.copy(artistForm.getImage().getBytes(), new File(fileUpload + fileName));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        Artist artist = new Artist(artistForm.getId(), artistForm.getName(),
+                artistForm.getDob(), artistForm.getCountryside(), artistForm.getFanpage(), fileName, artistForm.getJob());
+        artistService.save(artist);
+        return new ModelAndView("redirect:/artist");
+    }
+
     @GetMapping("/delete-artist/{id}")
     public ModelAndView showDeleteForm(@PathVariable("id") Long id) {
         Optional<Artist> artist = artistService.findById(id);

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>
+    <a th:href="@{/artistprize/create}">Tạo mục mới</a>
+</p>
+<h1>Nghệ sĩ và Giải thưởng</h1>
+<table border="1">
+    <tr>
+        <td>Tên nghệ sĩ</td>
+        <td>Tên giải thưởng</td>
+        <td>Năm nhận giải</td>
+        <td>Edit</td>
+        <td>Delete</td>
+    </tr>
+    <th:block th:each="ap : ${artistprizes}">
+        <tr>
+            <td th:text="${ap.getArtist().name}"></td>
+            <td th:text="${ap.getPrize().name}"></td>
+            <td th:text="${ap.year}"></td>
+            <td><a th:href="@{/artistprize/edit/__${ap.id}__}">Edit</a></td>
+            <td><a th:href="@{/artistprize/delete/__${ap.id}__}">Delete</a></td>
+        </tr>
+    </th:block>
+</table>
+</body>
+</html>

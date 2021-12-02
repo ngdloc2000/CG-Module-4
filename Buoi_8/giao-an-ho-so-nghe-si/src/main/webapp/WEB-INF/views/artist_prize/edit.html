@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>
+    <a th:href="@{/artistprize}">Quay lại trang chính</a>
+</p>
+<h1>Sửa nghệ sĩ và giải thưởng</h1>
+<form th:action="@{/artistprize/edit}" th:object="${artistprize}" method="post">
+    <table>
+        <input type="hidden" th:field="*{id}">
+        <tr>
+            <td>Tên nghệ sĩ</td>
+            <td>
+                <select name="artist">
+                    <option th:each="a : ${artists}"
+                            th:value="${a.id}"
+                            th:text="${a.name}"
+                            th:selected="(${artistprize.artist} and (${a.id}) == *{artist.id})"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Tên giải thưởng</td>
+            <td>
+                <select name="prize">
+                    <option th:each="p : ${prizes}"
+                            th:value="${p.id}"
+                            th:text="${p.name}"
+                            th:selected="(${artistprize.prize}) and (${p.id} == *{prize.id})">
+                    </option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Năm nhận giải</td>
+            <td>
+                <input type="text" th:field="*{year}">
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Sửa thông tin"></td>
+        </tr>
+    </table>
+</form>
+
+</body>
+</html>

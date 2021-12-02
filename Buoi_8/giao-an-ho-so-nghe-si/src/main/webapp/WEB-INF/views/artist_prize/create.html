@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>
+    <a th:href="@{/artistprize}">Quay lại trang chính</a>
+</p>
+<h1>Thêm mới</h1>
+<form th:action="@{/artistprize/create}" th:object="${artistprize}" method="post">
+    <table>
+        <input type="hidden" th:field="*{id}">
+        <div>
+            <label>Tên nghệ sĩ</label>
+            <select th:field="*{artist}">
+                <option th:each="a : ${artists}" th:value="${a.id}" th:text="${a.name}"></option>
+            </select>
+        </div>
+        <div>
+            <label>Giải thưởng</label>
+            <select th:field="*{prize}">
+                <option th:each="p : ${prizes}" th:value="${p.id}" th:text="${p.name}"></option>
+            </select>
+        </div>
+        <div>
+            <label>Năm nhận thưởng</label>
+            <input type="text" th:field="*{year}">
+        </div>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Tạo mục mới"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

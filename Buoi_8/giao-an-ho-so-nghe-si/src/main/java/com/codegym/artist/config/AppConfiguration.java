@@ -1,9 +1,13 @@
 package com.codegym.artist.config;
 
 import com.codegym.artist.aspect.ArtistAspect;
+import com.codegym.artist.formatter.ArtistFormatter;
 import com.codegym.artist.formatter.JobFormatter;
+import com.codegym.artist.formatter.PrizeFormatter;
 import com.codegym.artist.handler.CustomExceptionHandler;
+import com.codegym.artist.service.artist.ArtistService;
 import com.codegym.artist.service.job.JobService;
+import com.codegym.artist.service.prize.PrizeService;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -68,6 +72,8 @@ public class AppConfiguration implements WebMvcConfigurer, ApplicationContextAwa
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addFormatter(new JobFormatter(applicationContext.getBean(JobService.class)));
+        registry.addFormatter(new ArtistFormatter(applicationContext.getBean(ArtistService.class)));
+        registry.addFormatter(new PrizeFormatter(applicationContext.getBean(PrizeService.class)));
     }
 
     //Cấu hình Thymleaf
