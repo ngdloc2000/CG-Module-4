@@ -1,5 +1,8 @@
 package com.codegym.artist.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.List;
@@ -15,10 +18,11 @@ public class Artist {
     private String countryside;
     private String fanpage;
     private String image;
-    @ManyToOne
+    @ManyToOne(targetEntity = Job.class)
     @JoinColumn(name = "job_id")
     private Job job;
-    @OneToMany(mappedBy = "artist")
+    @OneToMany(mappedBy = "artist", targetEntity = ArtistPrize.class)
+    @JsonBackReference
     private List<ArtistPrize> artistPrizes;
 
     public Artist() {

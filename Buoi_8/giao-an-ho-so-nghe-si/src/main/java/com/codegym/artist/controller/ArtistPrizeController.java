@@ -75,4 +75,12 @@ public class ArtistPrizeController {
         aritstPrizeService.remove(id);
         return new ModelAndView("redirect:/artistprize");
     }
+
+    @GetMapping("/statistical/{id}")
+    public ModelAndView statistical(@PathVariable("id") Long id) {
+        Optional<Artist> artist = artistService.findById(id);
+        ModelAndView modelAndView = new ModelAndView("artist_prize/satistical");
+        modelAndView.addObject("satistical", aritstPrizeService.findByPrize(artist.get().getName()));
+        return modelAndView;
+    }
 }

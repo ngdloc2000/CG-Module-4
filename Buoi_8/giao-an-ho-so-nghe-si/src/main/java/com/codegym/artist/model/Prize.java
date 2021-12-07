@@ -1,5 +1,7 @@
 package com.codegym.artist.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -11,6 +13,7 @@ public class Prize {
     private Long id;
     private String name;
     @OneToMany(mappedBy = "prize")
+    @JsonBackReference
     private List<ArtistPrize> artistPrizes;
 
     public Prize() {

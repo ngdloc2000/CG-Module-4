@@ -1,5 +1,6 @@
 package com.codegym.artist.service.artist_prize;
 
+import com.codegym.artist.model.Artist;
 import com.codegym.artist.model.ArtistPrize;
 import com.codegym.artist.repository.IArtistPrizeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +31,10 @@ public class ArtistPrizeService implements IAritstPrizeService {
     @Override
     public void remove(Long id) {
         artistPrizeRepository.deleteById(id);
+    }
+
+    @Override
+    public Iterable<ArtistPrize> findByPrize(String name) {
+        return artistPrizeRepository.findByPrize(name);
     }
 }

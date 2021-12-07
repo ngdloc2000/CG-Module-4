@@ -31,4 +31,9 @@ public class ArtistService implements IArtistService {
     public void remove(Long id) {
         artistRepository.deleteById(id);
     }
+
+    @Override
+    public Iterable<Artist> findAllByJob_Name(String name) {
+        return artistRepository.findAllByJob_Name(name);
+    }
 }

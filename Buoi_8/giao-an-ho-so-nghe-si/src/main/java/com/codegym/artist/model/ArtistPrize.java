@@ -1,5 +1,8 @@
 package com.codegym.artist.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -7,7 +10,7 @@ public class ArtistPrize {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
+    @ManyToOne(targetEntity = Artist.class)
     @JoinColumn(name = "artist_id")
     private Artist artist;
     @ManyToOne
