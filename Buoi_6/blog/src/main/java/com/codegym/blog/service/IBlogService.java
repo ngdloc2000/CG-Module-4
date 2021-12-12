@@ -1,2 +1,15 @@
-package com.codegym.blog.service;public interface IBlogService {
+package com.codegym.blog.service;
+
+import com.codegym.blog.model.Blog;
+
+import java.util.List;
+
+public interface IBlogService {
+    List<Blog> findAll();
+
+    Blog findById(Long id);
+
+    void save(Blog blog);
+
+    void remove(Long id);
 }

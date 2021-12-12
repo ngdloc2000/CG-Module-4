@@ -1,2 +1,4 @@
-package com.codegym;public class SecurityConfig {
+package com.codegym;
+
+public class SecurityConfig {
 }

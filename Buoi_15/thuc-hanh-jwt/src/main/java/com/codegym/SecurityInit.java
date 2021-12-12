@@ -1,2 +1,4 @@
-package com.codegym;public class SecurityInit {
+package com.codegym;
+
+public class SecurityInit {
 }

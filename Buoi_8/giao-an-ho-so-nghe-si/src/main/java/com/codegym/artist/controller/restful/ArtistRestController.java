@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +22,21 @@ public class ArtistRestController {
     @Autowired
     private IJobService jobService;
 
+    @ModelAttribute("jobs")
+    public Iterable<Job> jobs() {
+        return jobService.findAll();
+    }
+
+    // -------------------- ModelAndView --------------------
     @GetMapping
+    public ModelAndView allArtistPage() {
+        ModelAndView modelAndView = new ModelAndView("ajax_jquery/artist/list");
+        modelAndView.addObject("artists", artistService.findAll());
+        return modelAndView;
+    }
+
+    // --------------------- RESTful ------------------------
+    @GetMapping("/list")
     public ResponseEntity<Iterable<Artist>> findAllArtists() {
         List<Artist> artists = (List<Artist>) artistService.findAll();
         if (artists.isEmpty()) {

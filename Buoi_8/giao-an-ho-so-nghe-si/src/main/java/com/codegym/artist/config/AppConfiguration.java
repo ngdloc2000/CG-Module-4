@@ -151,7 +151,8 @@ public class AppConfiguration implements WebMvcConfigurer, ApplicationContextAwa
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/image/**")
                 .addResourceLocations("file:" + fileUpload);
-
+        registry.addResourceHandler("/javascript/**")
+                .addResourceLocations("/javascript/");
     }
 
     @Bean(name = "multipartResolver")

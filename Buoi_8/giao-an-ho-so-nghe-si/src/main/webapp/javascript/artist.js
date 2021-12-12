@@ -1,18 +1,18 @@
 function addNewArtist() {
-    let formData = new FormData();
+    // let formData = new FormData();
     let name = $('#name').val();
     let dob = $('#dob').val();
     let countryside = $('#countryside').val();
     let fanpage = $('#fanpage').val();
     let job = $('#job').val();
-    let file = $('#file')[0].files[0];
-    formData.append('image', file);
+    let image = $('#images').val();
+    // formData.append('image', file);
     let newArtist = {
         name: name,
         dob: dob,
         countryside: countryside,
         fanpage: fanpage,
-        file: formData,
+        file: image,
         job: {
             id: job
         }
@@ -27,6 +27,7 @@ function addNewArtist() {
         url: "/api/artists",
         success: successHandler
     });
+    $('#exampleModal').modal('hide');
     event.preventDefault();
 }
 
@@ -77,7 +78,7 @@ function successHandler() {
         //xử lý khi thành công
         success: function (data) {
             // hien thi danh sach o day
-            let content = '<thead>' +
+            let content =
                 '    <tr>\n' +
                 '        <th>Ảnh đại diện</th>\n' +
                 '        <th>Tên nghệ sĩ</th>\n' +
@@ -87,12 +88,56 @@ function successHandler() {
                 '        <th>Nghề nghiệp</th>\n' +
                 '        <td>Delete</td>\n' +
                 '        <td>Edit</td>\n' +
-                '    </tr>' +
-                '   </thead>';
+                '    </tr>';
             for (let i = 0; i < data.length; i++) {
                 content += getArtist(data[i]);
             }
-            document.getElementById('artistList').innerHTML = content;
+            document.getElementById('body-list').innerHTML = content;
         }
+
     });
+    event.preventDefault();
+}
+
+function showFormCreate() {
+    $(document).ready(function () {
+        let content = `
+            <form id="addArtist" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label">Tên</label>
+                            <input type="text" class="form-control" id="name">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Ngày sinh</label>
+                            <input type="date" class="form-control" id="dob">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Quê quán</label>
+                            <input type="text" class="form-control" id="countryside">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Fanpage</label>
+                            <input type="text" class="form-control" id="fanpage">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Nghề nghiệp</label>
+                            <select class="form-select" id="job">
+                                <option selected disabled value="">Choose...</option>
+                                <option th:each="j : ${jobs}" th:value="${j.id}" th:text="${j.name}"></option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Ảnh đại diện</label>
+                            <input type="file" id="file">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="addNewArtist()">Save changes</button>
+                    </div>
+                </form>
+        `
+        document.getElementById('createForm').innerHTML = content;
+    })
 }

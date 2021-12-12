@@ -44,7 +44,7 @@ public class MainController {
 //    @ModelAttribute: là trả kết quả dưới tên được chỉ định
     @PostMapping("/addProduct")
     public String addProduct(@ModelAttribute("product") Product product, ModelMap modelMap) {
-        modelMap.addAttribute("productView", product);
+        modelMap.addAttribute("product", product);
         return "viewProduct";
     }
 

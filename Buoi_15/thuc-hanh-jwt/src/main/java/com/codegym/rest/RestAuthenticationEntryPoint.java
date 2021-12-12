@@ -1,2 +1,4 @@
-package com.codegym.rest;public class RestAuthenticationEntryPoint {
+package com.codegym.rest;
+
+public class RestAuthenticationEntryPoint {
 }
